@@ -4,5 +4,9 @@
     <string name="app_name">ProyectoEnvioDeArchivos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="lblIngresarNombre">Ingrese un nombre para mostrar</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="imgFotoContent">Foto</string>
+    <string name="preference_file_key"></string>
 
 </resources>

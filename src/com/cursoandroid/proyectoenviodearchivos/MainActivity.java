@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
@@ -18,8 +17,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		SharedPreferences sharedPref = this.getSharedPreferences(
-		        getString(R.string.preference_file_key), this.MODE_PRIVATE);
 		Fragment main = new MainFragment();
 		 //main.setArguments(args);
          FragmentManager fragmentManager = getFragmentManager();

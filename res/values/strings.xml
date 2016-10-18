@@ -8,5 +8,8 @@
     <string name="btnAceptar">Aceptar</string>
     <string name="imgFotoContent">Foto</string>
     <string name="preference_file_key"></string>
+    <string name="bienvenido">¡Bienvenido!</string>
+    <string name="que_desea">¿Qué desea hacer?</string>
+    <string name="title_activity_pantalla_principal">Enviar Ar..</string>
 
 </resources>

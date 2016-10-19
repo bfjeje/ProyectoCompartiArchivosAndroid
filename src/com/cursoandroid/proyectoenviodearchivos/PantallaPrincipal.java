@@ -42,6 +42,24 @@ public class PantallaPrincipal extends Activity {
 		boton_volver = (Button) findViewById(R.id.boton_volver);
 		boton_siguiente = (Button) findViewById(R.id.boton_siguiente);
 
+		boton_siguiente.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent_conexiones = new Intent(v.getContext(), Conexiones.class);
+				intent_conexiones.putExtra("imagen", image);
+				startActivity(intent_conexiones);
+				
+			}
+		});
+		
+		boton_volver.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	public void tomarFoto(View v) {
@@ -75,15 +93,14 @@ public class PantallaPrincipal extends Activity {
 		}
 	}
 	
-	private void metodoVolver(View v){
-		this.finish();
-	}
+//	private void metodoVolver(View v){
+//		this.finish();
+//	}
 	
-	private void metodoSiguiente(View v){
-		Intent intent_conexiones = new Intent(v.getContext(), Conexiones.class);
-		intent_conexiones.putExtra("imagen", image);
-		startActivity(intent_conexiones);
-		
-	}
+//	private void metodoSiguiente(View v){
+//		Intent intent_conexiones = new Intent(getApplicationContext(), Conexiones.class);
+//		intent_conexiones.putExtra("imagen", image);
+//		startActivity(intent_conexiones);
+//	}
 
 }

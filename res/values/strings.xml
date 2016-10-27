@@ -9,8 +9,11 @@
     <string name="bienvenido">¡Bienvenido</string>
     <string name="que_desea">¿Qué desea enviar?</string>
     <string name="siguiente">Siguiente</string>
-    <string name="volver">Volver</string>
+    <string name="volver">Volver</string> <!-- Pantalla Conexiones tambien -->
     <string name="title_activity_conexiones">Conexiones</string>
     <string name="hello_world">Hello world!</string>
+    
+    <!-- Pantalla Conexiones -->
+    <string name="enviar">Enviar</string>
 
 </resources>

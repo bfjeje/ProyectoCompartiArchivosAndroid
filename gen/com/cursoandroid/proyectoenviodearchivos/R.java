@@ -36,13 +36,13 @@ public final class R {
         public static final int boton_siguiente=0x7f090010;
         public static final int boton_volver=0x7f09000f;
         public static final int bottom_layout=0x7f090009;
-        public static final int btnBluetooth=0x7f090000;
-        public static final int btnBuscarDispositivo=0x7f090001;
-        public static final int button_enviar=0x7f090003;
-        public static final int button_volver=0x7f090004;
+        public static final int btnBluetooth=0x7f090002;
+        public static final int btnBuscarDispositivo=0x7f090004;
+        public static final int button_enviar=0x7f090001;
+        public static final int button_volver=0x7f090003;
         public static final int imagen_pantalla=0x7f09000e;
         public static final int layout_linear1=0x7f090008;
-        public static final int lvDispositivos=0x7f090002;
+        public static final int lvDispositivos=0x7f090000;
         public static final int textView1=0x7f090006;
         public static final int tv=0x7f090011;
     }
@@ -62,8 +62,9 @@ public final class R {
     }
     public static final class string {
         public static final int ActivarBluetooth=0x7f06000c;
-        public static final int DesactivarBluetooth=0x7f06000d;
-        public static final int DetectadoDispositivo=0x7f06000e;
+        public static final int BuscarDispositivos=0x7f06000d;
+        public static final int DesactivarBluetooth=0x7f06000e;
+        public static final int DetectadoDispositivo=0x7f06000f;
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         /**  Pantalla Principal 
@@ -83,7 +84,7 @@ public final class R {
          */
         public static final int title_activity_conexiones=0x7f060009;
         public static final int title_activity_pantalla_principal=0x7f060002;
-        public static final int title_activity_recibir_imagen=0x7f06000f;
+        public static final int title_activity_recibir_imagen=0x7f060010;
         public static final int volver=0x7f060008;
     }
     public static final class style {

@@ -14,6 +14,7 @@
     <string name="que_desea">¿Qué desea enviar?</string>
     <string name="siguiente">Siguiente</string>
     <string name="volver">Volver</string>
+    
  <!-- Pantalla Conexiones tambien -->
     <string name="title_activity_conexiones">Conexiones</string>
     <string name="hello_world">Hello world!</string>
@@ -21,6 +22,7 @@
     <!-- Pantalla Conexiones -->
     <string name="enviar">Enviar</string>
     <string name="ActivarBluetooth">Activar Bluetooth</string>
+    <string name="BuscarDispositivos">Buscar Dispositivos</string>
     <string name="DesactivarBluetooth">Desactivar Bluetooth</string>
     <string name="DetectadoDispositivo">Detectado Dispositivo</string>
     <string name="title_activity_recibir_imagen">RecibirImagen</string>

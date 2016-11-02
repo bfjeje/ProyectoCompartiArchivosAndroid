@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:text="@string/recibir_imagen" 
+        android:text="@string/enviar_imagen" 
         android:onClick="EnviarImagen"/>
 
     <Button

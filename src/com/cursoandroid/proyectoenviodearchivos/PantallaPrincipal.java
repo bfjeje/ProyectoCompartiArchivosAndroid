@@ -55,6 +55,7 @@ public class PantallaPrincipal extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				try{
 				if(!image.equals(null)){
 					imgView.buildDrawingCache();
 					image = imgView.getDrawingCache();
@@ -67,6 +68,9 @@ public class PantallaPrincipal extends Activity {
 					intent_conexiones.putExtras(extras);
 					startActivity(intent_conexiones);
 					}
+				}catch(Exception e){
+					Toast.makeText(v.getContext(), "No hay imagen", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		

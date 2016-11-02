@@ -2,32 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
-
-    <ListView
-        android:id="@+id/conexioneslistView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-    </ListView>
+    tools:context=".Conexiones" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnBluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Activar" />
+    
+    <Button
+        android:id="@+id/btnBuscarDispositivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" 
+        android:layout_toRightOf="@+id/btnBluetooth"
+        android:text="Button" />
+    
+    <ListView
+        android:id="@+id/lvDispositivos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+    	android:layout_weight="7"
+        android:layout_above="@+id/button_enviar"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btnBluetooth" >
+    
+    </ListView>
+    
+    <Button
+        android:id="@+id/button_enviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/volver" />
+        android:text="@string/enviar" />
+    
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/enviar" />
-
-    
+        android:text="@string/volver" />
 
 </RelativeLayout>

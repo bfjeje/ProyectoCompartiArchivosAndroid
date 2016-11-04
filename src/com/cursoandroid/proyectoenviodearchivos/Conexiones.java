@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import android.Manifest;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -16,8 +17,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +33,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 public class Conexiones extends Activity implements OnClickListener {
 
@@ -38,6 +43,8 @@ public class Conexiones extends Activity implements OnClickListener {
 	private Button btnBluetooth;
 	private BluetoothAdapter bAdapter;
 	private ArrayList<BluetoothDevice> arrayDevices;
+	
+	private final int REQUEST_READ_PHONE_STATE=15987;
 
 	// Instanciamos un BroadcastReceiver que se encargara de detectar si el
 	// estado
@@ -183,28 +190,36 @@ public class Conexiones extends Activity implements OnClickListener {
 		});
 		
 		//Aca empieza lo de enviar el archivo al dispositivo
-		lvDispositivos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+		lvDispositivos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				
-				//Enviar el archivo al dispositivo con la posicion
+			public void onItemClick(android.widget.AdapterView<?> parent, View view, int position, long id) {
 				ConnectThread miConexion = new ConnectThread(arrayDevices.get(position));
 				miConexion.run();
-				
 			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			
+		
 		});
-
+//		(new AdapterView.OnItemSelectedListener() {
+//
+//			@Override
+//			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//				
+//				//Enviar el archivo al dispositivo con la posicion
+//				ConnectThread miConexion = new ConnectThread(arrayDevices.get(position));
+//				miConexion.run();
+//				
+//			}
+//
+//			@Override
+//			public void onNothingSelected(AdapterView<?> parent) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			
+//		});
+//
+//	}
 	}
-
 	private void registrarEventosBluetooth() {
 		// Registramos el BroadcastReceiver que instanciamos previamente para
 		// detectar los distintos eventos que queremos recibir
@@ -304,12 +319,31 @@ public class Conexiones extends Activity implements OnClickListener {
 	        BluetoothSocket tmp = null;
 	        mmDevice = device;
 
+	        
+	        try{
 	        // Get a BluetoothSocket to connect with the given BluetoothDevice
-	        try {
-	            // MY_UUID is the app's UUID string, also used by the server code
-	            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString("Archivo"));
-	        } catch (IOException e) { }
+	        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
+
+	        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+	        	//TODO
+	            ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+	        } else {
+	        	try {
+		        	TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+			        String uuid = tManager.getDeviceId();
+		            // MY_UUID is the app's UUID string, also used by the server code
+		            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString(uuid));
+		        } catch (Exception e) {
+		        	System.out.println(e.toString());
+		        }
+	        }
+	        }
+	        catch(Exception e){
+	        	System.out.println(e.toString());
+
+	        }
 	        mmSocket = tmp;
+
 	        
 	    }
 
@@ -339,6 +373,20 @@ public class Conexiones extends Activity implements OnClickListener {
 	        try {
 	            mmSocket.close();
 	        } catch (IOException e) { }
+	    }
+	}
+	
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+	    switch (requestCode) {
+	        case REQUEST_READ_PHONE_STATE:
+	            if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+	                //TODO
+	            }
+	            break;
+
+	        default:
+	            break;
 	    }
 	}
 	
@@ -374,8 +422,8 @@ public class Conexiones extends Activity implements OnClickListener {
 	                // Read from the InputStream
 	                bytes = mmInStream.read(buffer);
 	                // Send the obtained bytes to the UI activity
-	                mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
-	                        .sendToTarget();
+//	                mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer)
+//	                        .sendToTarget();
 	            } catch (IOException e) {
 	                break;
 	            }

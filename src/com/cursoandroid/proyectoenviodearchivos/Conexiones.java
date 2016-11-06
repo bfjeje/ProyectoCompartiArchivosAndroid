@@ -33,8 +33,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 
 public class Conexiones extends Activity implements OnClickListener {
 
@@ -198,27 +197,6 @@ public class Conexiones extends Activity implements OnClickListener {
 			}
 		
 		});
-//		(new AdapterView.OnItemSelectedListener() {
-//
-//			@Override
-//			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//				
-//				//Enviar el archivo al dispositivo con la posicion
-//				ConnectThread miConexion = new ConnectThread(arrayDevices.get(position));
-//				miConexion.run();
-//				
-//			}
-//
-//			@Override
-//			public void onNothingSelected(AdapterView<?> parent) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			
-//		});
-//
-//	}
 	}
 	private void registrarEventosBluetooth() {
 		// Registramos el BroadcastReceiver que instanciamos previamente para
@@ -309,7 +287,8 @@ public class Conexiones extends Activity implements OnClickListener {
 		}
 	}
 	
-	private class ConnectThread extends Thread {
+	private class ConnectThread extends Thread implements ActivityCompat.OnRequestPermissionsResultCallback{
+//		private class ConnectThread extends Thread{
 	    private final BluetoothSocket mmSocket;
 	    private final BluetoothDevice mmDevice;
 
@@ -320,29 +299,32 @@ public class Conexiones extends Activity implements OnClickListener {
 	        mmDevice = device;
 
 	        
-	        try{
-	        // Get a BluetoothSocket to connect with the given BluetoothDevice
-	        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
+			try {
+				// Get a BluetoothSocket to connect with the given
+				// BluetoothDevice
+				int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
+				int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.READ_PHONE_STATE);
 
-	        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-	        	//TODO
-	            ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
-	        } else {
-	        	try {
-		        	TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-			        String uuid = tManager.getDeviceId();
-		            // MY_UUID is the app's UUID string, also used by the server code
-		            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString(uuid));
-		        } catch (Exception e) {
-		        	System.out.println(e.toString());
-		        }
-	        }
-	        }
-	        catch(Exception e){
-	        	System.out.println(e.toString());
+				if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+					// TODO
+					ActivityCompat.requestPermissions(getParent(),
+							new String[] { Manifest.permission.READ_PHONE_STATE }, REQUEST_READ_PHONE_STATE);
+				} else {
+					try {
+						TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+						String uuid = tManager.getDeviceId();
+						// MY_UUID is the app's UUID string, also used by the
+						// server code
+						tmp = device.createRfcommSocketToServiceRecord(UUID.fromString(uuid));
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					}
+				}
+			} catch (Exception f) {
+				System.out.println(f.toString());
 
-	        }
-	        mmSocket = tmp;
+			}
+			mmSocket = tmp;
 
 	        
 	    }
@@ -374,21 +356,23 @@ public class Conexiones extends Activity implements OnClickListener {
 	            mmSocket.close();
 	        } catch (IOException e) { }
 	    }
+
+		@Override
+		public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+		    switch (requestCode) {
+		        case REQUEST_READ_PHONE_STATE:
+		            if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+		                //TODO
+		            }
+		            break;
+
+		        default:
+		            break;
+		    }
+		}
 	}
 	
-	@Override
-	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-	    switch (requestCode) {
-	        case REQUEST_READ_PHONE_STATE:
-	            if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-	                //TODO
-	            }
-	            break;
-
-	        default:
-	            break;
-	    }
-	}
+	
 	
 	private class ConnectedThread extends Thread {
 	    private final BluetoothSocket mmSocket;

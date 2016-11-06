@@ -26,7 +26,7 @@ public final class R {
         public static final int logo=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f090012;
+        public static final int action_settings=0x7f090011;
         public static final int bienvenida_text_view=0x7f09000a;
         public static final int boton_archivo=0x7f09000d;
         public static final int boton_camara=0x7f09000b;
@@ -44,14 +44,12 @@ public final class R {
         public static final int layout_linear1=0x7f090008;
         public static final int lvDispositivos=0x7f090000;
         public static final int textView1=0x7f090006;
-        public static final int tv=0x7f090011;
     }
     public static final class layout {
         public static final int activity_conexiones=0x7f040000;
         public static final int activity_main=0x7f040001;
         public static final int activity_pantalla_principal=0x7f040002;
         public static final int activity_recibir_imagen=0x7f040003;
-        public static final int custom_item=0x7f040004;
     }
     public static final class menu {
         public static final int main=0x7f080000;
